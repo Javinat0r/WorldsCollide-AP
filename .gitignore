@@ -1,5 +1,7 @@
+.idea/
 __pycache__/
 *.py[cod]
 $py.class
 *-objective.json
 *-flag.json
+*.sfc

@@ -208,19 +208,6 @@ class NarsheBattle(Event):
             reward_instructions,
 
             field.SetParty(1),
-            
-            # ref: CB/7217
-            field.HoldScreen(),
-            field.DisableEntityCollision(field_entity.PARTY0),
-
-            field.EntityAct(field_entity.PARTY0, True,
-                field_entity.SetSpeed(field_entity.Speed.FAST),
-                field_entity.Move(direction.DOWN, 8),
-            ),
-
-            field.FadeOutScreen(4),
-            field.WaitForFade(),
-
             field.Call(field.REMOVE_ALL_CHARACTERS_FROM_ALL_PARTIES),
             field.Call(field.REFRESH_CHARACTERS_AND_SELECT_PARTY),
 

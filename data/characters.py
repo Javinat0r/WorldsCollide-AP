@@ -73,6 +73,11 @@ class Characters():
         self.set_unavailable(random_character)
         return random_character
 
+    def get_specific_character(self, name):
+        character = int(self.get_by_name(name).id)
+        self.set_unavailable(character)
+        return character
+
     def set_character_path(self, character, required_character):
         if required_character is not None:
             self.character_paths[character].extend(self.character_paths[required_character])
@@ -82,11 +87,10 @@ class Characters():
         return self.character_paths[character]
 
     def mod_init_levels(self):
-        # remove all variation in leveling, since we're controlling level directly
-        for character in self.characters:
-            character.init_level_factor = 0
-
-        characters_asm.set_starting_level(self.args.start_level)
+        if self.args.start_average_level:
+            # characters recruited at average level, set everyone's initial level to 3
+            for character in self.characters:
+                character.init_level_factor = 0
 
     def stats_random_percent(self):
         import random

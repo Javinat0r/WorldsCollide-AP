@@ -1,12 +1,15 @@
+import json
+
+
 class Arguments:
     def __init__(self):
         import importlib
         self.groups = [
             "settings",
             "objectives",
-            "starting_party", "characters", "swdtechs", "blitzes", "lores", "rages", "dances", "steal", "sketch_control", "commands",
+            "starting_party", "characters", "swdtechs", "blitzes", "lores", "rages", "dances", "steal", "commands",  
             "xpmpgp", "scaling", "bosses", "encounters", "boss_ai",
-            "espers", "natural_magic", "misc_magic",
+            "espers", "natural_magic",
             "starting_gold_items", "items", "shops", "chests",
             "graphics",
             "coliseum", "auction_house", "challenges", "bug_fixes", "misc",
@@ -27,7 +30,7 @@ class Arguments:
 
         self.parser.add_argument("-nro", dest = "no_rom_output", action = "store_true", help = "Do not output a modified rom file")
         self.parser.add_argument("-slog", dest = "stdout_log", action = "store_true", help = "Write log to stdout instead of file")
-        self.parser.add_argument("-hf", dest = "hide_flags", action = "store_true", help = "Hide Flags (no log, no flags menu)")
+        self.parser.add_argument("-ap", dest = "ap_data", help = "Provided Archipelago Data")
 
         for group in self.group_modules.values():
             group.parse(self.parser)
@@ -62,6 +65,12 @@ class Arguments:
 
         if self.debug:
             self.spoiler_log = True
+        self.ap_data_path = self.ap_data
+        if self.ap_data:
+            with open(self.ap_data) as ap_file:
+                decoded_data = json.load(ap_file)
+                print(decoded_data)
+            self.ap_data = decoded_data
 
     def _process_min_max(self, arg_name):
         values = getattr(self, arg_name)

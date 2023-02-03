@@ -74,7 +74,6 @@ check_bit = [
     NameBit("Narshe Moogle Defense", event_bit.FINISHED_MOOGLE_DEFENSE), # 64,
 ]
 
-
 quest_bit = [
     NameBit("Defeat Sealed Cave Ninja", event_bit.DEFEATED_NINJA_CAVE_TO_SEALED_GATE),
     NameBit("Help Injured Lad", event_bit.HELPED_INJURED_LAD),

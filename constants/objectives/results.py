@@ -61,7 +61,7 @@ category_types = {
         ResultType(58, "High Tier Item", "High Tier Item", None),
         ResultType(40, "Illumina", "Illumina", None),
         ResultType(39, "Imp Set", "Imp Set", None),
-        ResultType(41, "Rename Cards", "Rename Cards", None),
+        ResultType(41, "ArchplgoItems", "ArchplgoItems", None),
         ResultType(42, "Ribbon", "Ribbon", None),
         ResultType(43, "Tools", "Tools", None),
     ],
@@ -84,12 +84,6 @@ category_types = {
         ResultType(57, "Sour Mouth", "Sour Mouth", None),
     ],
 }
-
-#Additional results
-category_types["Command"].append(ResultType(59, "Magitek Upgrade", "Magitek Upgrade", None))
-category_types["Item"].append(ResultType(60, "Sprint Shoes", "Sprint Shoes", None))
-category_types["Auto"].append(ResultType(61, "Auto Dog Block", "Auto Dog Block", None))
-category_types["Auto"].append(ResultType(62, "Auto Life 3", "Auto Life 3", None))
 
 categories = list(category_types.keys())
 

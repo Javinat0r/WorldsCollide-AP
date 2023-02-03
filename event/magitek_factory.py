@@ -105,9 +105,7 @@ class MagitekFactory(Event):
 
         space = Reserve(0xc79a4, 0xc79cf, "magitek factory ifrit/shiva magicite", field.NOP())
         src = []
-        if self.args.flashes_remove_most or self.args.flashes_remove_worst:
-            src.append(field.FlashScreen(field.Flash.NONE))
-        else:
+        if not self.args.flashes_remove_most:
             src.append(field.FlashScreen(field.Flash.WHITE))
 
         src.append([

@@ -22,8 +22,7 @@ log_msg += f"Log       {os.path.basename(log_file)}\n"
 if args.website_link:
     log_msg += f"Website   {args.website_link}\n"
 log_msg += f"Seed      {args.seed}\n"
-if not args.hide_flags:
-    log_msg += f"Flags     {args.flags}\n"
+log_msg += f"Flags     {args.flags}\n"
 log_msg += f"Hash      {', '.join([entry.name for entry in args.sprite_hash])}"
 
 if args.debug:
@@ -34,5 +33,4 @@ logging.info(log_msg)
 if not args.stdout_log:
     print(log_msg)
 
-if not args.hide_flags:
-    args.log()
+args.log()

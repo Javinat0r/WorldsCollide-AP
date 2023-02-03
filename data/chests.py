@@ -1,4 +1,3 @@
-import constants.items
 from data.chest import Chest
 import data.chests_asm as chests_asm
 from data.structures import DataArrays
@@ -51,14 +50,10 @@ class Chests():
         from data.chest_item_tiers import tiers, tier_s_distribution
         self.item_tiers = tiers
 
-        # remove excluded items from tiers
-        excluded_items = self.items.get_excluded()
-        for idx, tier in enumerate(self.item_tiers):
-            tier = [(item) for item in tier if item not in excluded_items]
-            self.item_tiers[idx] = tier
-
-        # for S-tier, remaining item weights raised proportionally to their original weight
+        # remove excluded items from tier s
+        # remaining item weights raised proportionally to their original weight
         #   e.g. if original weights were [0.10, 0.50, 0.40] and 0.50 removed, the remaining ones become [0.20, 0.80]
+        excluded_items = self.items.get_excluded()
         self.item_tier_s_distribution = [(item_weight[0], item_weight[1]) for item_weight in tier_s_distribution
                                          if item_weight[0] not in excluded_items]
 
@@ -72,19 +67,6 @@ class Chests():
                 chest.contents = item_id
                 return
         raise IndexError(f"set_item: could not find chest at ({x}, {y}) on map {hex(map_id):<5}")
-
-    def ap_placement(self):
-        for chest in self.chests:
-            if str(chest.id) in self.args.ap_data.keys():
-                ap_data = self.args.ap_data[str(chest.id)]
-                if ap_data == "Ragnarok Sword":
-                    ap_data = "Ragnarok"
-                if ap_data == "Archipelago Item":
-                    chest.type = Chest.ITEM
-                    chest.contents = constants.items.name_id["ArchplgoItem"]
-                else:
-                    chest.type = Chest.ITEM
-                    chest.contents = constants.items.name_id[ap_data]
 
     def shuffle(self, types):
         import copy
@@ -278,9 +260,8 @@ class Chests():
 
     def mod(self):
         self.fix_shared_bits()
-        if self.args.ap_data:
-            self.ap_placement()
-        elif self.args.chest_contents_shuffle_random:
+
+        if self.args.chest_contents_shuffle_random:
             self.shuffle_random()
             self.remove_excluded_items()
         elif self.args.chest_contents_random_tiered:

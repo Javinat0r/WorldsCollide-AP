@@ -1,6 +1,5 @@
-def main(argv):
+def main():
     import args
-    args.init_args(argv)
     import log
 
     from memory.memory import Memory
@@ -13,7 +12,7 @@ def main(argv):
     events = Events(memory.rom, args, data)
 
     from menus.menus import Menus
-    menus = Menus(data.characters, data.dances, data.rages, data.enemies)
+    menus = Menus(data.characters, data.dances)
 
     from battle import Battle
     battle = Battle()
